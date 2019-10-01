@@ -1,0 +1,3 @@
+RewriteCond %{HTTP:Authorization} ^(.*)
+RewriteRule .* - [e=HTTP_AUTHORIZATION:%1]
+SetEnvIf Authorization .+ HTTP_AUTHENTICATION=$0
