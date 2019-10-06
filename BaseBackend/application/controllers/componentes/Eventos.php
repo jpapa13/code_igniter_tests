@@ -49,6 +49,38 @@ class Eventos extends REST_Controller {
                 ], REST_Controller::HTTP_NOT_ACCEPTABLE);
             }
         }    
+    }
+    public function detalle_post(){
+        $rules = array(
+            array(
+                'field'=>'evento_id',
+                'rules'=>'required|numeric',
+                'errors'=>array(
+                    'required'=>'El campo debe ser ingresado',
+                    'numeric'=> 'El campo debe ser numérico'
+                )
+            )
+        );
+        if ($this->request_lib->validar($this->post(),$rules) == FALSE)
+        {
+            $this->response([
+                'status' => FALSE,
+                'data'   => $this->form_validation->error_array()
+            ], REST_Controller::HTTP_BAD_REQUEST);
+        }else{
+            $respuesta = $this->Eventos_mdl->detalle($this->post('evento_id'));
+            if($respuesta !== FALSE){
+                $this->response([
+                    'status' => TRUE,
+                    'data'   => $respuesta
+                ], REST_Controller::HTTP_OK);
+            }else{
+                $this->response([
+                    'status' => FALSE,
+                    'data'   => 'evento no encontrado'
+                ], REST_Controller::HTTP_NOT_ACCEPTABLE);
+            }
+        }    
     }/*
     public function archivos_todos_post()
     {

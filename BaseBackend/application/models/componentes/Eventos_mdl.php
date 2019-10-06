@@ -15,6 +15,15 @@ class Eventos_mdl extends CI_Model{
         $this->db->where('l.nombre',$sede);
         return $this->db->get()->result();
     }
+    public function detalle($evento_id)
+    {   
+        $this->db->select("e.`id`, e.`titulo`, e.`descripcion`, e.`inicio`, e.`fin`, a.ruta, l.nombre, e.lugar_fk ");
+        $this->db->from('evento AS e');
+        $this->db->join('archivo AS a','banner_fk = a.id','left');
+        $this->db->join('lugar AS l','lugar_fk = l.id ','left');
+        $this->db->where('e.id',$evento_id);
+        return $this->db->get()->result();
+    }
     /*public function archivos_todos($sede,$tipo)
     {   
         switch($tipo){
