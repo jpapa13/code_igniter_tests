@@ -1,13 +1,31 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Lugares_mdl extends CI_Model{
+class Eventos_mdl extends CI_Model{
     public function __construct()
     {
         parent::__construct();
     }
-    public function archivos_todos($sede,$tipo)
+    public function archivo_banner($sede)
     {   
+        $this->db->select("a.ruta");
+        $this->db->from('archivo as a');
+        $this->db->join('evento as e','e.banner_fk = a.id','inner');
+        $this->db->join('lugar as l','e.sede_fk = l.id','inner');
+        $this->db->where('l.nombre',$sede);
+        return $this->db->get()->result();
+    }
+    /*public function archivos_todos($sede,$tipo)
+    {   
+        switch($tipo){
+            case "imagenes":
+
+                break;
+            case "banners":
+                break;
+            case "videos":
+                break;
+        }
         $this->db->select("a.ruta");
         $this->db->from('lugar as l');
         $this->db->join('galeria_lugar as g_l','l.id = g_l.lugar_fk','inner');
@@ -18,7 +36,8 @@ class Lugares_mdl extends CI_Model{
             'l.nombre'=>$sede
         ));
         return $this->db->get()->result();
-    }
+    
+    }*/
     
     public function __destruct()
     {
