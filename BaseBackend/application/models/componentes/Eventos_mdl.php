@@ -8,7 +8,7 @@ class Eventos_mdl extends CI_Model{
     }
     public function archivo_banner($sede)
     {   
-        $this->db->select("a.ruta");
+        $this->db->select("e.id, a.ruta");
         $this->db->from('archivo as a');
         $this->db->join('evento as e','e.banner_fk = a.id','inner');
         $this->db->join('lugar as l','e.sede_fk = l.id','inner');

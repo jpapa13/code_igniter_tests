@@ -40,7 +40,7 @@ class Eventos extends REST_Controller {
             if($respuesta !== FALSE){
                 $this->response([
                     'status' => TRUE,
-                    'dataa'   => $respuesta
+                    'data'   => $respuesta
                 ], REST_Controller::HTTP_OK);
             }else{
                 $this->response([
