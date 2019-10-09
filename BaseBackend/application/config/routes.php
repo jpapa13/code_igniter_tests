@@ -134,6 +134,14 @@ $route['componentes/solicitudes/ver_todos']['GET'] = 'componentes/Solicitudes/to
 //LUGARES
 $route['componentes/lugares/galeria']['POST'] = 'componentes/Lugares/archivos_todos';
 
+//EVENTOS
+$route['componentes/eventos/banners']['POST'] = 'componentes/Eventos/archivo_banner';
+$route['componentes/eventos/detalle']['POST'] = 'componentes/Eventos/detalle';
+$route['componentes/eventos/imagenes']['POST'] = 'componentes/Eventos/imagenes';
+
+//DIRECTORIO
+$route['componentes/directorio/area/obtener']['POST'] = 'componentes/Directorio/obtener_area';
+
 //CATALOGOS
 $route['catalogos/carreras']['GET'] = 'catalogos/Carrera/todos';
 $route['catalogos/tipos_archivo']['GET'] = 'catalogos/TipoArchivo/todos';

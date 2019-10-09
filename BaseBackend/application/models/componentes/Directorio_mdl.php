@@ -6,7 +6,7 @@ class Directorio_mdl extends CI_Model{
     {
         parent::__construct();
     }
-    public function area($parent)
+    public function obtener_area($parent)
     {   
         $this->db->from('area');
        $this->db->where('dentro_de_fk',$parent);
