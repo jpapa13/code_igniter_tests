@@ -18,7 +18,20 @@ class Directorio extends REST_Controller {
 			'data'   => $this->get()
 		], REST_Controller::HTTP_OK);
 	}
-
+	public function recursivo($arreglo, $res)
+	{
+		//if(!empty($arreglo)){
+			foreach($arreglo as $d){
+				$res[$d->nombre] = array(
+					'id'=>$d->id,
+					'hoja'=>null
+				);
+				$aux = $this->Directorio_mdl->obtener_area($d->id);
+				$res[$d->nombre]['hoja'] = $this->recursivo($aux,$res[$d->nombre]['hoja']);
+			}
+		//}
+		return $res;
+	}
 	public function obtener_area_post(){
         $rules = array(
             array(
@@ -36,11 +49,14 @@ class Directorio extends REST_Controller {
                 'data'   => $this->form_validation->error_array()
             ], REST_Controller::HTTP_BAD_REQUEST);
         }else{
+			
             $respuesta = $this->Directorio_mdl->obtener_area($this->post('parent'));
             if($respuesta !== FALSE){
-                $this->response([
+				$res = [];
+				$respuestaR = $this->recursivo($respuesta,$res);
+				$this->response([
                     'status' => TRUE,
-                    'data'   => $respuesta
+                    'data'   => $respuestaR
                 ], REST_Controller::HTTP_OK);
             }else{
                 $this->response([
